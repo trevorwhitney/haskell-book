@@ -56,8 +56,8 @@ phone = DaPhone [two, three, four, five, six, seven, eight, nine]
 
 parseMessage :: DaPhone -> String -> [(Digit, Presses)]
 parseMessage phone message = 
-    foldr (\x acc -> acc ++ (calculatePresses (button x) x)) [] message where 
+    map (\x -> calculatePresses (button x) x) message where 
       button = (\x -> findButtonForChar phone x)
 
 convertConvoToPresses :: DaPhone -> [String] -> [[(Digit, Presses)]]
-convertConvoToPresses phone convo = foldr (\x -> parseMessage phone x) [] convo
+convertConvoToPresses phone convo = map (\x -> parseMessage phone x) convo
